@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,6 +29,12 @@ public class Mvvm0TalkActivity extends AppCompatActivity implements TextView.OnE
         viewModel = new Mvvm0ViewModel(this);
         ViewDataBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main_mvvm);
         binding.setVariable(BR.viewModel, viewModel);
+
+
+        ScrollView scrollView = this.findViewById(R.id.content_scroll_view);
+        scrollView.setOnScrollChangeListener((view, x, y, ox, oy) -> {
+            viewModel.updateNumInvisible();
+        });
     }
 
 
